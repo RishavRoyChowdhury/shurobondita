@@ -21,29 +21,11 @@
         align-items: center;
        }
 
-       .logo {
-        flex: 0 1 auto;
-        max-width: 100px;
+      .logo {
+        width: 100%;
+        max-width: auto; /* Adjust to your logo's natural width or remove if full-width is desired */
         height: auto;
-       }
-
-       .logo img {
-        width: auto;
-        height: auto;
-        display: block;
-       }
-
-       @media (max-width: 768px) {
-        .logo {
-        max-width: 80px;
-        }
-       }
-
-       @media (max-width: 480px) {
-        .logo {
-        max-width: 60px;
-        }
-       }
+      }
       .site-title {
        font-size: 1.4rem;
        font-weight: 600;
