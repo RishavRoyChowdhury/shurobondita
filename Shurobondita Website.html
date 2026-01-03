@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shurobondita - IISER Tirupati Saraswati Puja</title>
+    <style>
+        :root {
+            --color-primary: #8B5A3C;
+            --color-accent: #D4AF37;
+            --color-secondary: #E8DCC8;
+            --color-dark: #2C1810;
+            --color-light: #F5F1E8;
+            --color-gold: #FFD700;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--color-light);
+        }
+
+        /* Logo Section - Centered and Responsive */
+        .logo-section {
+            background: var(--color-light);
+            padding: 1.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 3px solid var(--color-accent);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            max-width: 200px;
+            width: 100%;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Responsive Logo Sizes */
+        @media (max-width: 768px) {
+            .logo-section {
+                padding: 1.2rem 0.8rem;
+            }
+
+            .logo-container {
+                max-width: 160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-section {
+                padding: 1rem 0.5rem;
+            }
+
+            .logo-container {
+                max-width: 120px;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-dark) 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--color-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--color-accent);
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #A0694F 50%, var(--color-dark) 100%);
+            color: var(--color-light);
+            padding: 4rem 2rem;
+            text-align: center;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--color-accent);
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+
+        /* Countdown Timer */
+        .countdown-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin: 2rem auto;
+            max-width: 600px;
+            border: 2px solid var(--color-accent);
+        }
+
+        .countdown-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--color-accent);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .countdown-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--color-light);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-dates {
+            font-size: 1.2rem;
+            color: var(--color-light);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        /* Content Sections */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .content h2 {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--color-accent);
+            padding-bottom: 1rem;
+        }
+
+        .content h3 {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .highlight {
+            background: var(--color-secondary);
+            padding: 1.5rem;
+            border-left: 5px solid var(--color-accent);
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+
+        .highlight strong {
+            color: var(--color-primary);
+        }
+
+        /* Links Grid */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .link-card {
+            background: var(--color-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid var(--color-accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .link-card h4 {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .link-card a {
+            display: inline-block;
+            background: var(--color-primary);
+            color: var(--color-light);
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-card a:hover {
+            background: var(--color-dark);
+        }
+
+        .link-card p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        /* Events Section */
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, rgba(139, 90, 60, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border: 2px solid var(--color-accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+            border-color: var(--color-gold);
+        }
+
+        .event-card:hover::before {
+            left: 100%;
+        }
+
+        .event-time {
+            font-size: 0.85rem;
+            color: var(--color-accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-card h4 {
+            color: var(--color-primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .event-card p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Gallery Section */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 250px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid var(--color-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+
+        .gallery-item:hover {
+            transform: scale(1.08) rotateY(-5deg);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.4);
+        }
+
+        .gallery-item-content {
+            text-align: center;
+            color: var(--color-light);
+            z-index: 2;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-content {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 90, 60, 0.8), rgba(44, 24, 16, 0.9));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-desc {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Instagram Button */
+        .instagram-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 999;
+            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0) rotateZ(-180deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotateZ(0deg);
+                opacity: 1;
+            }
+        }
+
+        .instagram-btn:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 10px 30px rgba(244, 128, 74, 0.5);
+        }
+
+        .instagram-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Smooth scroll on all pages */
+        .page {
+            animation: fadeInScale 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-dark) 100%);
+            color: var(--color-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 3px solid var(--color-accent);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content h2 {
+                font-size: 2rem;
+            }
+
+            .content h3 {
+                font-size: 1.2rem;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            nav ul {
+                gap: 0.8rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .countdown-number {
+                font-size: 1.8rem;
+            }
+
+            .content {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo Section -->
+    <div class="logo-section">
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="Shurobondita logo" class="logo-img">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('about')">About Us</a></li>
+            <li><a onclick="showPage('events')">Events</a></li>
+            <li><a onclick="showPage('gallery')">Gallery</a></li>
+            <li><a onclick="showPage('links')">Important Links</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>🎨 Shurobondita 🎨</h1>
+            <p class="subtitle">IISER Tirupati's Annual Celebration of Saraswati Puja</p>
+            <p class="tagline">Celebrating Knowledge, Culture, and Creativity through Vasant Panchami</p>
+
+            <div class="countdown-container">
+                <div class="countdown-title">Countdown to Shurobondita</div>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">0</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">0</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">0</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">0</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                <div class="event-dates">📅 January 23 - 26, 2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Page -->
+    <div id="about" class="page">
+        <div class="content">
+            <h2>About Shurobondita</h2>
+
+            <p>
+                <strong>Shurobondita</strong> is IISER Tirupati's most vibrant and cherished annual celebration of 
+                <strong>Saraswati Puja</strong>, the festival dedicated to the goddess of wisdom, knowledge, and arts. 
+                This magnificent festival is observed on <strong>Vasant Panchami</strong>, the fifth day of spring, 
+                when nature awakens with new possibilities and fresh beginnings.
+            </p>
+
+            <h3>🎭 Our Vision</h3>
+            <p>
+                Shurobondita celebrates the convergence of academic excellence and cultural richness. We believe that 
+                a truly educated institution nurtures both the intellectual and creative faculties of its students. 
+                Through this festival, we honor Saraswati, the embodiment of knowledge, and create a vibrant space 
+                where students, faculty, and the broader community come together to celebrate learning, art, music, 
+                and scholarship.
+            </p>
+
+            <h3>🌟 What Makes Shurobondita Special</h3>
+            <div class="highlight">
+                <strong>Shurobondita</strong> is a multi-day festival featuring:
+                <ul style="margin-top: 1rem; margin-left: 1.5rem; line-height: 2;">
+                    <li>🎨 <strong>Cultural Performances:</strong> Classical and contemporary dance, music, and theater</li>
+                    <li>📚 <strong>Academic Events:</strong> Seminars, quizzes, and intellectual competitions</li>
+                    <li>🎪 <strong>Art & Craft Exhibitions:</strong> Showcasing student creativity and talent</li>
+                    <li>🍽️ <strong>Festive Meals:</strong> Traditional delicacies and community feasting</li>
+                    <li>🏆 <strong>Competitions & Awards:</strong> Recognition of excellence across various domains</li>
+                    <li>✨ <strong>Ritual Worship:</strong> Traditional Saraswati Puja ceremonies</li>
+                </ul>
+            </div>
+
+            <h3>📍 About IISER Tirupati</h3>
+            <p>
+                The Indian Institute of Science Education and Research (IISER) Tirupati is a premier institution 
+                dedicated to research and education in science. Located in the sacred city of Tirupati, IISER Tirupati 
+                combines world-class academic standards with India's rich cultural heritage. The institute actively 
+                promotes cultural events and celebrations that foster a sense of community and belonging among students.
+            </p>
+
+            <h3>🎯 The Vasant Panchami Connection</h3>
+            <p>
+                <strong>Vasant Panchami</strong> marks the arrival of spring and is traditionally associated with learning, 
+                wisdom, and new beginnings. Celebrated across India with great fervor, this day is dedicated to Saraswati, 
+                who represents knowledge, arts, music, and wisdom. Shurobondita harnesses this spirit to create an 
+                unforgettable experience for all participants.
+            </p>
+        </div>
+    </div>
+
+    <!-- Important Links Page -->
+    <div id="links" class="page">
+        <div class="content">
+            <h2>Important Links</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+                Connect with us and stay updated on all Shurobondita events and announcements
+            </p>
+
+            <div class="links-grid">
+                <div class="link-card">
+                    <h4>🎫 Event Registration</h4>
+                    <p>Register for Shurobondita 2026 and secure your spot in this grand celebration.</p>
+                    <a href="#" onclick="alert('Registration link will be updated soon')">Register Now</a>
+                </div>
+
+                <div class="link-card">
+                    <h4>📸 Photo Gallery</h4>
+                    <p>View memorable moments from Shurobondita editions and get inspired.</p>
+                    <a href="#" onclick="alert('Photo gallery coming soon')">View Gallery</a>
+                </div>
+
+                <div class="link-card">
+                    <h4>📧 Contact Us</h4>
+                    <p>Have questions or want to sponsor? Reach out to our organizing committee.</p>
+                    <a href="mailto:shurobondita@iisertirupati.ac.in">Send Email</a>
+                </div>
+
+                <div class="link-card">
+                    <h4>🏫 IISER Tirupati</h4>
+                    <p>Learn more about Indian Institute of Science Education and Research.</p>
+                    <a href="https://www.iisertirupati.ac.in" target="_blank" rel="noopener noreferrer">Visit IISER</a>
+                </div>
+
+                <div class="link-card">
+                    <h4>🎵 Music & Performance</h4>
+                    <p>Explore details about cultural performances and artistic events at Shurobondita.</p>
+                    <a href="#" onclick="alert('Performance schedule coming soon')">View Schedule</a>
+                </div>
+
+                <div class="link-card">
+                    <h4>💼 Sponsorship</h4>
+                    <p>Interested in sponsoring Shurobondita? Connect with us for partnership opportunities.</p>
+                    <a href="mailto:sponsors@iisertirupati.ac.in">Sponsor Us</a>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem;">📋 Quick Information</h3>
+            <div class="highlight">
+                <strong>Event Details:</strong>
+                <p style="margin-top: 1rem;">
+                    <strong>📅 Dates:</strong> January 23-26, 2026<br>
+                    <strong>📍 Location:</strong> IISER Tirupati Campus<br>
+                    <strong>⏰ Timing:</strong> Full-day celebration with evening cultural programs<br>
+                    <strong>👥 Participants:</strong> Students, Faculty, Staff, and Community Members<br>
+                    <strong>📞 Information:</strong> Contact the Student Activities Office<br>
+                    <strong>💰 Entry:</strong> Free for all IISER students and community
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Events Page -->
+    <div id="events" class="page">
+        <div class="content">
+            <h2>🎪 Events & Activities</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+                Experience the magic of Shurobondita through our diverse range of cultural, academic, and artistic events
+            </p>
+
+            <div class="events-container">
+                <div class="event-card">
+                    <div class="event-time">Day 1 - Morning | 23 Jan</div>
+                    <h4>🎨 Saraswati Puja Ritual</h4>
+                    <p>Begin the festival with the sacred ritual worship of Goddess Saraswati, celebrating knowledge and wisdom. A spiritually enriching ceremony with traditional aarti and blessings.</p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-time">Day 1 - Evening | 23 Jan</div>
+                    <h4>🎭 Classical Dance Performance</h4>
+                    <p>Witness mesmerizing classical dance performances by talented artists celebrating the divine grace of Saraswati through Bharatanatyam and Odissi dance forms.</p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-time">Day 2 - Afternoon | 24 Jan</div>
+                    <h4>🎵 Live Music Concert</h4>
+                    <p>Enjoy soulful renditions of classical Indian music featuring traditional instruments and contemporary compositions celebrating the festival spirit.</p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-time">Day 2 - Evening | 24 Jan</div>
+                    <h4>📚 Academic Quiz & Seminar</h4>
+                    <p>Participate in intellectual competitions, engaging seminars on science and humanities, and thought-provoking discussions led by distinguished scholars.</p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-time">Day 3 - All Day | 25 Jan</div>
+                    <h4>🎨 Art & Craft Exhibition</h4>
+                    <p>Explore stunning artworks, paintings, sculptures, and handcrafted items created by our talented students. An opportunity to celebrate creativity in all its forms.</p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-time">Day 4 - All Day | 26 Jan</div>
+                    <h4>🍽️ Festive Feast & Celebration</h4>
+                    <p>Indulge in traditional Bengali delicacies and special meals prepared to delight your taste buds. A community feast celebrating togetherness and joy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Page -->
+    <div id="gallery" class="page">
+        <div class="content">
+            <h2>📸 Gallery</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+                Relive the moments from previous Shurobondita celebrations. Click on any image to learn more.
+            </p>
+
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <div class="gallery-item-overlay"></div>
+                    <div class="gallery-item-content">
+                        <div class="gallery-title">🎨 Saraswati Worship</div>
+                        <div class="gallery-desc">Sacred Rituals</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-overlay"></div>
+                    <div class="gallery-item-content">
+                        <div class="gallery-title">🎭 Dance Forms</div>
+                        <div class="gallery-desc">Cultural Performances</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-overlay"></div>
+                    <div class="gallery-item-content">
+                        <div class="gallery-title">🎵 Music Concerts</div>
+                        <div class="gallery-desc">Melodious Moments</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-overlay"></div>
+                    <div class="gallery-item-content">
+                        <div class="gallery-title">🎨 Student Art</div>
+                        <div class="gallery-desc">Creative Expressions</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-overlay"></div>
+                    <div class="gallery-item-content">
+                        <div class="gallery-title">🏆 Competitions</div>
+                        <div class="gallery-desc">Excellence & Awards</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-overlay"></div>
+                    <div class="gallery-item-content">
+                        <div class="gallery-title">🍽️ Festive Feasts</div>
+                        <div class="gallery-desc">Community Celebration</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025-2026 Shurobondita - IISER Tirupati. All rights reserved.</p>
+        <p>Celebrating Knowledge, Creativity, and Culture through Saraswati Puja 🎨✨</p>
+        <p>Vasant Panchami | January 23-26, 2026</p>
+    </footer>
+
+    <!-- Instagram Button -->
+    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="instagram-btn" title="Follow us on Instagram">📱</a>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('2026-01-23T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+
+            if (distance < 0) {
+                document.querySelector('.countdown-title').textContent = 'Shurobondita is now happening! 🎉';
+                document.querySelector('.countdown').style.display = 'none';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
